@@ -1,3 +1,5 @@
+// Image you thinking that we IP log you...
+// List of NPM Modules we used for this project.
 const express = require('express');
 const cors = require('cors');
 const path = require("path");
@@ -23,17 +25,32 @@ app.listen(PORT, () => {
 	console.log(`Server Works !!! At port ${PORT}`);
 });
 
+// For the SSL and TLS shit
+
 const options = {
   key: fs.readFileSync("./cert/key.key"),
   cert: fs.readFileSync("./cert/cert.crt")
 };
+const MongoClient = require('mongodb');
 
-const config = require('./config.json')
-const keys = config.keys;
+MongoClient.connect(keys, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
+        .then(client => {
+            app.locals.db = client.db('sharexkeys');
+            console.log("Connected To Database");
+        })
+        .catch(() => console.error('Failed to connect to the database'));
+
+const checkIfShortIdExists = (db, code) => db.collection('sharexkeys')
+        .findOne({
+            short_id: keyss
+        });
 
 https.createServer(options, app).listen(443);
 
-// Logger
+// Logger Console
 var logger = require('./logger.js');
 // Random string
 var randomString = require('random-string');
