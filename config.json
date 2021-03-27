@@ -1,0 +1,14 @@
+{
+    "fileSizeLimit": 10485760,
+    "fileNameLength": idkbutoklolshitman,
+    "serverUrl": "https://unrestricted.host",
+    "fileExtensionCheck": {
+        "enabled": false,
+        "extensionsAllowed": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".gif"
+        ]
+    }
+}
